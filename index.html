@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>生日快乐！</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      /* 冰蓝色调渐变 */
+      background: linear-gradient(135deg, #e0f2fe 0%, #7dd3fc 50%, #38bdf8 100%);
+      color: #0c4a6e;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow-x: hidden;
+    }
+
+    /* 容器毛玻璃 */
+    .container {
+      max-width: 420px;
+      width: 90%;
+      padding: 40px 24px;
+      background: rgba(255, 255, 255, 0.4);
+      backdrop-filter: blur(12px);
+      border-radius: 20px;
+      box-shadow: 0 15px 35px rgba(0, 162, 255, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.6);
+      z-index: 10;
+      position: relative;
+      text-align: center;
+    }
+
+    .text {
+      font-size: 20px;
+      line-height: 1.8;
+      letter-spacing: 1px;
+      margin-bottom: 25px;
+    }
+
+    .text span {
+      display: block;
+      opacity: 0;
+      transform: translateY(15px);
+      animation: fadeUp 0.8s ease forwards;
+    }
+
+    /* 蓝色调 */
+    .highlight {
+      color: #0369a1;
+      font-weight: 900;
+      font-size: 28px;
+      text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+      margin-top: 10px;
+    }
+
+    .text span:nth-child(1) {
+      animation-delay: 0.5s;
+    }
+
+    .text span:nth-child(2) {
+      animation-delay: 1.3s;
+    }
+
+    .text span:nth-child(3) {
+      animation-delay: 2.1s;
+    }
+
+    @keyframes fadeUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+
+    /* 漂浮的小雪花/冰晶 */
+    .snow-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .snowflake {
+      position: absolute;
+      bottom: -10px;
+      color: #fff;
+      text-shadow: 0 0 5px #7dd3fc;
+      animation: floatUp 5s linear infinite;
+      opacity: 0;
+    }
+
+    @keyframes floatUp {
+      0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 0;
+      }
+
+      20% {
+        opacity: 0.7;
+      }
+
+      100% {
+        transform: translateY(-100vh) rotate(360deg);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="snow-container" id="snowContainer"></div>
+
+  <div class="container">
+    <div class="text">
+      <span>( ⑨ )</span>
+      <span>在这个世界上你就是最强的！</span>
+      <span class="highlight">❄️ 生日快乐 ❄️</span>
+    </div>
+
+    <footer>
+      —— 祝福自sf
+    </footer>
+  </div>
+
+  <script>
+    // 自动生成雪花和冰晶
+    function createSnowflake() {
+      const snow = document.createElement('div');
+      snow.className = 'snowflake';
+      // 随机切换雪花和冰晶符号
+      const icons = ['❄️', '❄', '✧', '🧊'];
+      snow.innerHTML = icons[Math.floor(Math.random() * icons.length)];
+
+      snow.style.left = Math.random() * 100 + 'vw';
+      snow.style.animationDuration = Math.random() * 3 + 4 + 's';
+      snow.style.fontSize = Math.random() * 10 + 10 + 'px';
+      snow.style.filter = `blur(${Math.random() * 1}px)`;
+
+      document.getElementById('snowContainer').appendChild(snow);
+
+      setTimeout(() => {
+        snow.remove();
+      }, 5000);
+    }
+    setInterval(createSnowflake, 300);
+  </script>
+</body>
+
+</html>
